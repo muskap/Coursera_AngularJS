@@ -1,0 +1,9 @@
+/*heading styles*/
+.caution {
+  font-style: italic;
+  font-size: 0.60em;
+}
+
+#listInput {
+  font-size: 1.5em;
+}
