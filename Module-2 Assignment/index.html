@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <title>Shopping List Checker</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+  </head>
+  <body ng-app="shoppingListApp">
+
+    <div class="container">
+      <!--Here comes all the content -->
+      <h1>shopping List Checker</h1>
+
+      <div class="row">
+        <!--here comes the input fields -->
+        <div class="col-xs-12 col-sm-6" ng-controller="shoppingListInputController as listInput">
+          <div class="form-group well" id="itemInput">
+            <label>Add Items To Buy:</label>
+            <input type="text" class="form-control" placeholder="Item Name" ng-model="listInput.itemName">
+            <input type="text" class="form-control" placeholder="item Quantity" ng-model="listInput.itemQuantity">
+            <button class="btn btn-default" ng-click="listInput.addItem();">Add Item</button>
+          </div>
+        </div>
+      </div>
+
+      <!--creating a different row for the to buy list and the already bought list -->
+      <div class="row">
+        <!--here come the list of to be bought and already bought items -->
+        <div class="col-xs-12 col-sm-6" ng-controller="shoppingToBuyController as toBuyList">
+          <!--here comes the list of items to be bought -->
+          <h3>To buy list</h3>
+          <ul>
+            <li id="toBuyItem" class="itemTile" ng-repeat="item in toBuyList.toBuyItems">
+              <div class="row">
+                <div class="col-xs-7">
+                  <h4>Item</h4>
+                  {{item.name}}
+                </div>
+                <div class="col-xs-3">
+                  <h4>Qty:</h4>
+                  {{item.quantity}}
+                </div>
+                <div class="col-xs-1">
+                  <button class="btn btn-success" ng-click="toBuyList.buyItem($index);" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-ok"></span></button>
+                  <button class="btn btn-danger" ng-click="toBuyList.removeItem($index);"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-6" ng-controller="shoppingBoughtController as boughtList">
+          <!--here comes the list of elemtnts already bought-->
+          <h3>Already Bought list</h3>
+          <ul>
+            <li id="bouhghtItem" class="itemTile" ng-repeat="item in boughtList.boughtItems">
+              <div class="row">
+                <div class="col-xs-7">
+                  <h4>Item</h4>
+                  {{item.name}}
+                </div>
+                <div class="col-xs-3">
+                  <h4>Qty:</h4>
+                  {{item.quantity}}
+                </div>
+                <div class="col-xs-1">
+                  <button class="btn btn-warning" ng-click="boughtList.unBuyItem($index);" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-repeat"></span></button>
+                  <button class="btn btn-danger" ng-click="boughtList.removeItem($index);"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <h4 ng-show="!boughtList.boughtItems.length">No Items Bought Yet!</h4>
+        </div>
+
+      </div>
+
+    </div>
+      <!-- jQuery (Bootstrap JS plugins depend on it) -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+  </body>
+</html>
